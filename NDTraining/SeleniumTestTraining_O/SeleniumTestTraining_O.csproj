@@ -63,9 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DucotSaveSavedSearch.cs" />
-    <Compile Include="DucotSearchForDocument.cs" />
-    <Compile Include="DucotUserLogIn.cs" />
+    <Compile Include="Tests\DucotSaveSavedSearch.cs" />
+    <Compile Include="Tests\DucotSearchForDocument.cs" />
+    <Compile Include="Tests\DucotUserLogIn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

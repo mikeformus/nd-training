@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTestTraining_O
+namespace SeleniumTestTraining_O.Tests
 {
     class DucotSearchForDocument
     {
@@ -16,14 +16,14 @@ namespace SeleniumTestTraining_O
         string result = "";
 
         [SetUp]
-        public void startBrowser()
+        public void StartBrowser()
         {
             driver = new ChromeDriver("C:\\Program Files (x86)\\Google\\Chrome\\Application");
             driver.Manage().Window.Maximize();
         }
 
         [TestCase("4814-5575-9744")]
-        public void ducotDocumentSearch(string docid)
+        public void DucotDocumentSearch(string docid)
         {
             driver.Url = "https://ducot.netdocuments.com/neWeb2/docCent.aspx";
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
@@ -47,7 +47,7 @@ namespace SeleniumTestTraining_O
         }
 
         [TearDown]
-        public void closeBrowser()
+        public void CloseBrowser()
         {
             driver.Close();
         }

@@ -8,22 +8,22 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTestTraining_O
+namespace SeleniumTestTraining_O.Tests
 {
-    class DucotSaveSavedSearch
+    class DucotSaveSavedSearchTest
     {
         IWebDriver driver;
         bool result = false;
 
         [SetUp]
-        public void startBrowser()
+        public void StartBrowser()
         {
             driver = new ChromeDriver("C:\\Program Files (x86)\\Google\\Chrome\\Application");
             driver.Manage().Window.Maximize();
         }
 
         [TestCase("=11(docx) =10([NG-868ZJAEQ])", "Saved with Auto Test")]
-        public void ducotSaveSavedSearch(string criteria, string searchName)
+        public void DucotSaveSavedSearch(string criteria, string searchName)
         {
             driver.Url = "https://ducot.netdocuments.com/neWeb2/docCent.aspx";
 
@@ -66,7 +66,7 @@ namespace SeleniumTestTraining_O
         }
 
         [TearDown]
-        public void closeBrowser()
+        public void CloseBrowser()
         {
             driver.Close();
         }

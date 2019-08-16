@@ -8,21 +8,21 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTestTraining_O
+namespace SeleniumTestTraining_O.Tests
 {
     class DucotUserLogIn
     {
         IWebDriver driver;
 
         [SetUp]
-        public void startBrowser()
+        public void StartBrowser()
         {
             driver = new ChromeDriver("C:\\Program Files (x86)\\Google\\Chrome\\Application");
             driver.Manage().Window.Maximize();
         }
 
         [TestCase("Oleksandr")]
-        public void ducotLoginTest(string result)
+        public void DucotLoginTest(string result)
         {
             driver.Url = "https://ducot.netdocuments.com/neWeb2/docCent.aspx";
 
@@ -38,7 +38,7 @@ namespace SeleniumTestTraining_O
         }
 
         [TearDown]
-        public void closeBrowser()
+        public void CloseBrowser()
         {
             driver.Close();
         }
