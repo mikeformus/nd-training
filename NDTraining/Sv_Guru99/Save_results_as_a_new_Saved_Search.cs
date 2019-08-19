@@ -59,8 +59,6 @@ namespace Sv_Selenium
             Assert.That(titleList, Is.EqualTo("Save search"));
             SaveSearch.Click();
 
-
-
             //var containerOptionsButton = driver.FindElement(By.XPath("//*[@id='Layer_2']"));
             //var selectTest = new SelectElement(containerOptionsButton);		
             //selectTest.SelectByValue("Save search");
