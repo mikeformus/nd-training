@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvEmployeeService", "SvEmpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvEmployeeService.Tests", "SvEmployeeService.Tests\SvEmployeeService.Tests.csproj", "{B51B9D05-AC7A-4110-838F-28760B4D3689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sv_Selenium", "Sv_Guru99\Sv_Selenium.csproj", "{D9EA187C-9ABD-4569-96A4-0FB901F0D062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sv_Selenium", "Sv_Selenium\Sv_Selenium.csproj", "{D9EA187C-9ABD-4569-96A4-0FB901F0D062}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
