@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,65 +11,31 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumTestTraining_O.Tests
 {
-    class DucotSaveSavedSearchTest
+    class DucotSaveSavedSearchTest : BaseTest
     {
-        IWebDriver driver;
-        bool result = false;
+        protected readonly string menuOption = "Save search";
+        protected readonly string savedSearchName = "Saved with Auto Test";
+        protected readonly string searchCriteria = "=11(docx) =10([NG-868ZJAEQ])";
 
-        [SetUp]
-        public void StartBrowser()
+        LoginPage objLogin;
+        HomePage objHome;
+        SearchResultsPage objSearch;
+        CreateSavedSearchPage objSaveSearch;
+
+        [Test]
+        public void DucotSaveSavedSearch()
         {
-            driver = new ChromeDriver("C:\\Program Files (x86)\\Google\\Chrome\\Application");
-            driver.Manage().Window.Maximize();
-        }
+            objLogin = new LoginPage(driver);
+            objHome = new HomePage(driver);
+            objSearch = new SearchResultsPage(driver);
+            objSaveSearch = new CreateSavedSearchPage(driver);
 
-        [TestCase("=11(docx) =10([NG-868ZJAEQ])", "Saved with Auto Test")]
-        public void DucotSaveSavedSearch(string criteria, string searchName)
-        {
-            driver.Url = "https://ducot.netdocuments.com/neWeb2/docCent.aspx";
+            objLogin.LoginToWebsite(userName, passWord);
+            objHome.PerformSearch(searchCriteria);
+            objSearch.SelectMenuOption(menuOption);
+            objSaveSearch.SaveSeach(savedSearchName);
 
-            SeleniumTestTraining_O actions = new SeleniumTestTraining_O();
-
-            actions.UserLogin(driver, "opovsh", "rewards4!");
-
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-
-            actions.PerformSimpleSearch(driver, wait, criteria);
-
-            driver.FindElement(By.Id("containerOptionsId")).Click();
-
-            IReadOnlyCollection<IWebElement> listMenu = driver.FindElements(By.CssSelector(".ndMenu-list li"));
-
-            for (int i = 0; i < listMenu.Count(); i++)
-            {
-                IWebElement option = listMenu.ElementAt(i);
-                if (option.Text == "Save search")
-                {
-                    option.Click();
-                    break;
-                }
-            }
-
-            wait.Until(x => driver.FindElement(By.CssSelector("input[id=docName]"))).SendKeys(searchName);
-
-            driver.FindElement(By.Name("okButton")).Click();
-
-            try
-            {
-                result = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElementLocated(By.Id("containerOptionsId"), searchName));
-            }
-            catch (WebDriverTimeoutException)
-            {
-                result = false;
-            }
-
-            Assert.IsTrue(result);
-        }
-
-        [TearDown]
-        public void CloseBrowser()
-        {
-            driver.Close();
+            Assert.IsTrue(objSearch.CheckSavedSearchName(savedSearchName));
         }
     }
 }

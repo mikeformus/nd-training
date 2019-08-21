@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,37 +11,22 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumTestTraining_O.Tests
 {
-    class DucotUserLogIn
+    class DucotUserLogIn : BaseTest
     {
-        IWebDriver driver;
+        protected readonly string nameCheck = "Oleksandr";
 
-        [SetUp]
-        public void StartBrowser()
+        LoginPage objLogin;
+        HomePage objHome;
+
+        [Test]
+        public void DucotLoginTest()
         {
-            driver = new ChromeDriver("C:\\Program Files (x86)\\Google\\Chrome\\Application");
-            driver.Manage().Window.Maximize();
-        }
+            objLogin = new LoginPage(driver);
+            objHome = new HomePage(driver);
 
-        [TestCase("Oleksandr")]
-        public void DucotLoginTest(string result)
-        {
-            driver.Url = "https://ducot.netdocuments.com/neWeb2/docCent.aspx";
+            objLogin.LoginToWebsite(userName, passWord);
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
-
-            SeleniumTestTraining_O actions = new SeleniumTestTraining_O();
-
-            actions.UserLogin(driver, "opovsh", "rewards4!");
-
-            IWebElement userName = wait.Until(x => driver.FindElement(By.Id("personalMenuName")));
-
-            Assert.That(userName.Text, Is.EqualTo(result));
-        }
-
-        [TearDown]
-        public void CloseBrowser()
-        {
-            driver.Close();
+            Assert.That(objHome.GetUserName(), Is.EqualTo(nameCheck));
         }
     }
 }
