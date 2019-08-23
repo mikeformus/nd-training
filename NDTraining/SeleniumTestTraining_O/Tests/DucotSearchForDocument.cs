@@ -13,25 +13,17 @@ namespace SeleniumTestTraining_O.Tests
 {
     class DucotSearchForDocument : BaseTest
     {
-        protected readonly string searchCriteria = "=3(Ducot Selenium Test Search)";
-        protected readonly string foundDocID = "4814-5575-9744";
-
-        LoginPage objLogin;
-        HomePage objHome;
-        SearchResultsPage objSearch;
+        protected readonly string docName = "Ducot Selenium Test Search";
+        protected string SearchCriteria => "=3(" + docName + ")";
 
         [Test]
         public void DucotDocumentSearch()
         {
-            objLogin = new LoginPage(driver);
-            objHome = new HomePage(driver);
-            objSearch = new SearchResultsPage(driver);
+            ui.LoginPage.Value.LoginToWebsite(userName, passWord);
 
-            objLogin.LoginToWebsite(userName, passWord);
+            ui.HomePage.Value.PerformSearch(SearchCriteria);
 
-            objHome.PerformSearch(searchCriteria);
-
-            Assert.IsTrue(objSearch.CheckForFoundDoc(foundDocID));
+            Assert.IsTrue(ui.SearchResultsPage.Value.CheckForFoundItem(docName));
         }
     }
 }

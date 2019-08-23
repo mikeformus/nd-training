@@ -15,18 +15,12 @@ namespace SeleniumTestTraining_O.Tests
     {
         protected readonly string nameCheck = "Oleksandr";
 
-        LoginPage objLogin;
-        HomePage objHome;
-
         [Test]
         public void DucotLoginTest()
         {
-            objLogin = new LoginPage(driver);
-            objHome = new HomePage(driver);
+            ui.LoginPage.Value.LoginToWebsite(userName, passWord);
 
-            objLogin.LoginToWebsite(userName, passWord);
-
-            Assert.That(objHome.GetUserName(), Is.EqualTo(nameCheck));
+            Assert.That(ui.HomePage.Value.GetUserName(), Is.EqualTo(nameCheck));
         }
     }
 }

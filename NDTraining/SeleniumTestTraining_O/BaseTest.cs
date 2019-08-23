@@ -13,10 +13,11 @@ namespace SeleniumTestTraining_O
 {
     class BaseTest
     {
+        protected IWebDriver driver;
+        protected UI ui;
 
         protected readonly string userName = "opovsh";
         protected readonly string passWord = "rewards4!";
-        protected IWebDriver driver;
 
         [SetUp]
         public void StartBrowser()
@@ -24,6 +25,7 @@ namespace SeleniumTestTraining_O
             driver = new ChromeDriver(ConfigurationManager.AppSettings["ChromeDriver"]);
             driver.Manage().Window.Maximize();
             driver.Url = ConfigurationManager.AppSettings["BaseUrl"];
+            ui = new UI(driver);
         }
 
         [TearDown]
