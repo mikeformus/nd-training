@@ -50,7 +50,7 @@ namespace SeleniumTestTraining_O
             driver.FindElement(searchResultsMenu).Click();
         }
 
-        public void SelectFromMenuList()//string selectOption)
+        public void SelectFromMenuList()
         {
             driver.FindElement(menuOptionsItem).Click();
         }
