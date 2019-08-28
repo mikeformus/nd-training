@@ -15,16 +15,17 @@ namespace SeleniumTestTraining_O.Tests
     {
         protected readonly string savedSearchName = "Saved with Auto Test";
         protected readonly string searchCriteria = "=11(docx) =10([NG-868ZJAEQ])";
+        protected readonly string menuOption = "saveSearch";
 
         [Test]
         public void DucotSaveSavedSearch()
         {
-            ui.LoginPage.Value.LoginToWebsite(userName, passWord);
-            ui.HomePage.Value.PerformSearch(searchCriteria);
-            ui.SearchResultsPage.Value.SelectMenuOption();
-            ui.CreateSavedSearchPage.Value.SaveSeach(savedSearchName);
+            UI.LoginPage.LoginToWebsite(userName, passWord)
+                        .PerformSearch(searchCriteria)
+                        .SelectMenuOption(menuOption)
+                        .SaveSeach(savedSearchName);
 
-            Assert.IsTrue(ui.SearchResultsPage.Value.CheckForFoundItem(savedSearchName));
+            Assert.IsTrue(UI.SearchResultsPage.CheckForFoundItem(savedSearchName));
         }
     }
 }

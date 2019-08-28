@@ -18,9 +18,16 @@ namespace SeleniumTestTraining_O
             this.driver = driver;
         }
 
-        public Lazy<LoginPage> LoginPage => new Lazy<LoginPage>(() => new LoginPage(driver));
-        public Lazy<HomePage> HomePage => new Lazy<HomePage>(() => new HomePage(driver));
-        public Lazy<SearchResultsPage> SearchResultsPage => new Lazy<SearchResultsPage>(() => new SearchResultsPage(driver));
-        public Lazy<CreateSavedSearchPage> CreateSavedSearchPage => new Lazy<CreateSavedSearchPage>(() => new CreateSavedSearchPage(driver));
+        private HomePage _homePage;
+        public HomePage HomePage => _homePage ?? (_homePage = new HomePage(driver));
+
+        private LoginPage _loginPage;
+        public LoginPage LoginPage => _loginPage ?? (_loginPage = new LoginPage(driver));
+
+        private SearchResultsPage _searchResultsPage;
+        public SearchResultsPage SearchResultsPage => _searchResultsPage ?? (_searchResultsPage = new SearchResultsPage(driver));
+
+        private CreateSavedSearchPage _createSavedSearchPage;
+        public CreateSavedSearchPage CreateSavedSearchPage => _createSavedSearchPage ?? (_createSavedSearchPage = new CreateSavedSearchPage(driver));
     }
 }

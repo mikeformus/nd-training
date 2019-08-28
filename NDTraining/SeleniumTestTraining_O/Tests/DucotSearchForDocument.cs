@@ -19,11 +19,10 @@ namespace SeleniumTestTraining_O.Tests
         [Test]
         public void DucotDocumentSearch()
         {
-            ui.LoginPage.Value.LoginToWebsite(userName, passWord);
+            UI.LoginPage.LoginToWebsite(userName, passWord)
+                        .PerformSearch(SearchCriteria);
 
-            ui.HomePage.Value.PerformSearch(SearchCriteria);
-
-            Assert.IsTrue(ui.SearchResultsPage.Value.CheckForFoundItem(docName));
+            Assert.IsTrue(UI.SearchResultsPage.CheckForFoundItem(docName));
         }
     }
 }

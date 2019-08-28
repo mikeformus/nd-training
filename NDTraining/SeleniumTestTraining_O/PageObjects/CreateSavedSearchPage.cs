@@ -20,22 +20,27 @@ namespace SeleniumTestTraining_O
             this.driver = driver;
         }
 
-        public void EnterSavedSearchName(string searchName)
+        public CreateSavedSearchPage EnterSavedSearchName(string searchName)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
             wait.Until(x => driver.FindElement(savedSearchName)).SendKeys(searchName);
+
+            return new CreateSavedSearchPage(driver);
         }
 
-        public void ClickOKButton()
+        public SearchResultsPage ClickOKButton()
         {
             driver.FindElement(savedSearchOKBtn).Click();
+
+            return new SearchResultsPage(driver);
         }
 
-        public void SaveSeach(string searchName)
+        public SearchResultsPage SaveSeach(string searchName)
         {
-            EnterSavedSearchName(searchName);
-            ClickOKButton();
+            EnterSavedSearchName(searchName).ClickOKButton();
+
+            return new SearchResultsPage(driver);
         }
     }
 }

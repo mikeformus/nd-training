@@ -17,10 +17,10 @@ namespace SeleniumTestTraining_O.Tests
 
         [Test]
         public void DucotLoginTest()
-        {
-            ui.LoginPage.Value.LoginToWebsite(userName, passWord);
+        {            
+            UI.LoginPage.LoginToWebsite(userName, passWord);
 
-            Assert.That(ui.HomePage.Value.GetUserName(), Is.EqualTo(nameCheck));
+            Assert.That(UI.HomePage.GetUserName(), Is.EqualTo(nameCheck));
         }
     }
 }

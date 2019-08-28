@@ -22,26 +22,32 @@ namespace SeleniumTestTraining_O
             this.driver = driver;
         }
 
-        public void SetUserName(string uName)
+        public LoginPage SetUserName(string uName)
         {
             driver.FindElement(userName).SendKeys(uName);
+
+            return new LoginPage(driver);
         }
 
-        public void SetPassword(string pWord)
+        public LoginPage SetPassword(string pWord)
         {
             driver.FindElement(passWord).SendKeys(pWord);
+
+            return new LoginPage(driver);
         }
 
-        public void ClickLoginButton()
+        public HomePage ClickLoginButton()
         {
             driver.FindElement(loginBtn).Click();
+
+            return new HomePage(driver);
         }
 
-        public void LoginToWebsite(string uName, string pWord)
+        public HomePage LoginToWebsite(string uName, string pWord)
         {
-            this.SetUserName(uName);
-            this.SetPassword(pWord);
-            this.ClickLoginButton();
+            SetUserName(uName).SetPassword(pWord).ClickLoginButton();
+
+            return new HomePage(driver);
         }
 
     }

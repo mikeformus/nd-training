@@ -14,8 +14,9 @@ namespace SeleniumTestTraining_O
         readonly IWebDriver driver;
         readonly By searchResultsLoaded = By.Id("lvCheckMaster-input");
         readonly By searchResultsMenu = By.Id("containerOptionsId");
-        readonly By menuOptionsItem = By.XPath($"//li[contains(@class,'saveSearch')]");
         private By ListViewItem(string itemName) => By.XPath($"//span[contains(@class,'lvName-span')][@title='{itemName}']");
+        private By MenuOptionItem(string itemName) => By.XPath($"//li[contains(@class,'{itemName}')]");
+
 
         public SearchResultsPage(IWebDriver driver)
         {
@@ -37,7 +38,7 @@ namespace SeleniumTestTraining_O
             return result;
         }
 
-        public void OpenSearchResultsMenu()
+        public SearchResultsPage OpenSearchResultsMenu()
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
@@ -48,17 +49,22 @@ namespace SeleniumTestTraining_O
             catch (Exception) {/*ignore exceptions*/}
 
             driver.FindElement(searchResultsMenu).Click();
+
+            return new SearchResultsPage(driver);
         }
 
-        public void SelectFromMenuList()
+        public CreateSavedSearchPage SelectFromMenuList(string menuOption)
         {
-            driver.FindElement(menuOptionsItem).Click();
+            driver.FindElement(MenuOptionItem(menuOption)).Click();
+
+            return new CreateSavedSearchPage(driver);
         }
 
-        public void SelectMenuOption()
+        public CreateSavedSearchPage SelectMenuOption(string menuOption)
         {
-            OpenSearchResultsMenu();
-            SelectFromMenuList();
+            OpenSearchResultsMenu().SelectFromMenuList(menuOption);
+
+            return new CreateSavedSearchPage(driver);
         }
     }
 }
