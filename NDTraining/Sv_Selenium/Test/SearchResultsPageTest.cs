@@ -16,23 +16,23 @@ namespace Sv_Selenium.Test
     class SearchResultsPageTest : BaseTest
     {
 
-        private LoginPage objLoginPage;
-        private SearchResultsPage objSearchResultsPage;
+        private LoginPage LoginPage;
+        private SearchResultsPage SearchResultsPage;
+        private const string testNdDocId = "4819-5337-4080";
 
         [Test]
         public void FindDocumentInSearchResultPage()
         {
-            objLoginPage = new LoginPage(driver);
-            objLoginPage.LoginToDucot(strUserName, strPassword);
+            LoginPage = new LoginPage(driver);
+            LoginPage.LoginToDucot(UserName, Password);
 
-            objSearchResultsPage = new SearchResultsPage(driver, waiter);
+            SearchResultsPage = new SearchResultsPage(driver, waiter);
 
             // performs simple search
-            objSearchResultsPage.Search("4819-5337-4080");
+            SearchResultsPage.Search(testNdDocId);
 
             // checks that needed document appears in search results
-            var docName = objSearchResultsPage.GetSearchResultDocumentName("4819-5337-4080");                     
-            Assert.That(docName, Is.EqualTo("dehbrde"));
+            Assert.True(SearchResultsPage.IsListViewItemDisplayed(testNdDocId));
         }
     }
 }

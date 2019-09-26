@@ -14,12 +14,11 @@ namespace Sv_Selenium.PageObjects
 {
     public class LoginPage
     {
-
         readonly IWebDriver driver;
 
-        readonly By emailTextBox = By.CssSelector("input[id=username]");
-        readonly By password = By.CssSelector("input[id=password]");
-        readonly By loginBtn = By.CssSelector("input[id=loginBtn]");
+        public IWebElement UserNameInput => driver.FindElement(By.CssSelector("input[id=username]"));
+        public IWebElement PasswordInput => driver.FindElement(By.CssSelector("input[id=password]"));
+        public IWebElement LoginBtn => driver.FindElement(By.CssSelector("input[id=loginBtn]"));
 
         public LoginPage(IWebDriver driver)
         {
@@ -28,31 +27,30 @@ namespace Sv_Selenium.PageObjects
 
         }
 
-        public void SetEmailTextBox(string strUserName)
+        public void SetEmailTextBox(string UserName)
         {
 
-            driver.FindElement(emailTextBox).SendKeys(strUserName);
-
+            UserNameInput.SendKeys(UserName);
         }
 
-        public void SetPassword(string strPassword)
+        public void SetPassword(string Password)
         {
 
-            driver.FindElement(password).SendKeys(strPassword);
+            PasswordInput.SendKeys(Password);
 
         }
 
         public void ClickLoginButton()
         {
 
-            driver.FindElement(loginBtn).Click();
+            LoginBtn.Click();
 
         }
 
-        public void LoginToDucot(string strUserName, string strPasword)
+        public void LoginToDucot(string UserName, string Password)
         {
-            SetEmailTextBox(strUserName);
-            SetPassword(strPasword);
+            SetEmailTextBox(UserName);
+            SetPassword(Password);
             ClickLoginButton();
         }
     }

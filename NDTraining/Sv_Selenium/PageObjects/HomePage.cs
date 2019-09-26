@@ -26,9 +26,9 @@ namespace Sv_Selenium.PageObjects
         {
 
             return waiter.Until(SeleniumExtras.WaitHelpers
-                                                             .ExpectedConditions
-                                                            .ElementIsVisible(By.Id("personalMenuName")))
-                                        .GetAttribute("title");
+                                              .ExpectedConditions
+                                              .ElementIsVisible(By.Id("personalMenuName")))
+                                              .GetAttribute("title");
         }
     }
 }

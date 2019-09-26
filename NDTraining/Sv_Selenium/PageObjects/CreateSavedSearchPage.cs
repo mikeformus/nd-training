@@ -14,18 +14,15 @@ namespace Sv_Selenium.PageObjects
 {
     class CreateSavedSearchPage
     {
-
         private readonly IWebDriver driver;
         private readonly WebDriverWait waiter;
-        private readonly By locator = By.Id("containerOptionsButton");
-        private readonly By okButton = By.Name("okButton"); 
 
-        public IWebElement ContainerOptionsButton =>
-              waiter.Until(SeleniumExtras.WaitHelpers
-             .ExpectedConditions
-             .ElementToBeClickable(locator));
+        public IWebElement ContainerOptionsButton => waiter.Until(SeleniumExtras.WaitHelpers
+                                                           .ExpectedConditions
+                                                           .ElementToBeClickable(By.Id("containerOptionsButton")));
 
         public IWebElement SaveSearchMenuItem => ContainerOptions.FindElement(By.ClassName("saveSearch"));
+
         public IWebElement ContainerOptions => waiter.Until(SeleniumExtras.WaitHelpers
                                                      .ExpectedConditions
                                                      .ElementToBeClickable(By.Id("containerOptions")));
@@ -33,12 +30,9 @@ namespace Sv_Selenium.PageObjects
                                                      .ExpectedConditions
                                                      .ElementToBeClickable(By.Id("containerOptionsId")));
 
+        public IWebElement OkButton => driver.FindElement(By.Name("okButton"));
 
         public string ContainerOptionsIdTitle => ContainerOptionsId.GetAttribute("title");
-
-
-
-
 
         public CreateSavedSearchPage(IWebDriver driver, WebDriverWait waiter)
         {
@@ -61,14 +55,18 @@ namespace Sv_Selenium.PageObjects
 
         public void ClickOnOkButton()
         {
-            driver.FindElement(okButton).Click();
+            OkButton.Click();
         }
 
         public void WaitSaveSearchPage()
         {
+
             waiter.Until(SeleniumExtras.WaitHelpers
-                                             .ExpectedConditions
-                                             .UrlContains("/savedSearch"));
+                                       .ExpectedConditions
+                                       .UrlContains("/savedSearch"));
+
         }
     }
 }
+
+

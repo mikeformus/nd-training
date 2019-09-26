@@ -14,8 +14,8 @@ namespace Sv_Selenium.Test
     public class BaseTest
     {
 
-        protected readonly string strUserName = "snovy";
-        protected readonly string strPassword = "test12345!";
+        protected readonly string UserName = "snovy";
+        protected readonly string Password = "test12345!";
         protected IWebDriver driver;
         protected WebDriverWait waiter;
        

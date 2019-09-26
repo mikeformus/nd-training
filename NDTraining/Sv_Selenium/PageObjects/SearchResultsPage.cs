@@ -14,8 +14,11 @@ namespace Sv_Selenium.PageObjects
         readonly IWebDriver driver;
         readonly WebDriverWait waiter;
 
-        readonly By searchBtn = By.Id("hsGo");
+        public IWebElement SearchInput => waiter.Until(SeleniumExtras.WaitHelpers
+                                             .ExpectedConditions
+                                             .ElementToBeClickable(By.Id("nd-hsCriteria-input")));
 
+        public IWebElement SearchButton => driver.FindElement(By.Id("hsGo"));
 
         public SearchResultsPage(IWebDriver driver, WebDriverWait waiter)
         {
@@ -27,22 +30,26 @@ namespace Sv_Selenium.PageObjects
 
         public void Search(string searchText)
         {
-            var search = waiter.Until(SeleniumExtras.WaitHelpers
-                                            .ExpectedConditions
-                                            .ElementToBeClickable(By.Id("nd-hsCriteria-input")));
-
-            var executeSearch = driver.FindElement(searchBtn);
-            search.SendKeys(searchText);
-            executeSearch.Click();
+            SearchInput.SendKeys(searchText);
+            SearchButton.Click();
         }
 
         public string GetSearchResultDocumentName(string searchText)
         {
             var documentRow = waiter.Until(SeleniumExtras.WaitHelpers
-                                                              .ExpectedConditions
-                                                              .ElementIsVisible(By.ClassName("id_"+ searchText)));
+                                                         .ExpectedConditions
+                                                         .ElementIsVisible(By.ClassName("id_"+ searchText)));
             var documentNameSpan = documentRow.FindElement(By.ClassName("lvName-span"));
             return documentNameSpan.GetAttribute("title");
+        }
+
+        public bool IsListViewItemDisplayed(string documentName)
+        {
+            var documentRow = waiter.Until(SeleniumExtras.WaitHelpers
+                                             .ExpectedConditions
+                                             .ElementIsVisible(By.ClassName("id_" + documentName)));
+
+            return documentRow != null;
         }
     }
 }

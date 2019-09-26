@@ -14,55 +14,32 @@ namespace Sv_Selenium.Test
 {
     class CreateSavedSearchPageTest : BaseTest
     {
-        private LoginPage objLoginPage;
-        private SearchResultsPage objSearchResultsPage;
-        private CreateSavedSearchPage objCreateSavedSearchPage;
+        private LoginPage LoginPage;
+        private SearchResultsPage SearchResultsPage;
+        private CreateSavedSearchPage CreateSavedSearchPage;
+        private const string testNdDocId = "4819-5337-4080";
 
         [Test]
         public void FindDocumentInSearchResultPage()
         {
-            objLoginPage = new LoginPage(driver);
-            objLoginPage.LoginToDucot(strUserName, strPassword);
+            LoginPage = new LoginPage(driver);
+            LoginPage.LoginToDucot(UserName, Password);
 
-            objSearchResultsPage = new SearchResultsPage(driver, waiter);
+            SearchResultsPage = new SearchResultsPage(driver, waiter);
 
             // performs simple search
-            objSearchResultsPage.Search("4819-5337-4080");
+            SearchResultsPage.Search(testNdDocId);
 
-           //save search
+            //save search
+            CreateSavedSearchPage = new CreateSavedSearchPage(driver, waiter);
+            CreateSavedSearchPage.ClickOnContainerOptionsButton();
+            CreateSavedSearchPage.ClickSaveSearchSubMenu();
+            CreateSavedSearchPage.ClickOnOkButton();
+            CreateSavedSearchPage.WaitSaveSearchPage();
 
-            objCreateSavedSearchPage = new CreateSavedSearchPage(driver, waiter);
-            objCreateSavedSearchPage.ClickOnContainerOptionsButton();
+            Assert.True(SearchResultsPage.IsListViewItemDisplayed(testNdDocId));
 
-            //var docName = objSearchResultsPage.GetSearchResultDocumentName("4819-5337-4080");
-            //Assert.That(docName, Is.EqualTo("dehbrde"));
-
-
-            //var aaa = objCreateSavedSearchPage.SaveSearchMenuItemTitle;
-
-
-           
-
-            objCreateSavedSearchPage.ClickSaveSearchSubMenu();                       
-            objCreateSavedSearchPage.ClickOnOkButton();
-            objCreateSavedSearchPage.WaitSaveSearchPage();
-
-            Assert.That(objCreateSavedSearchPage.ContainerOptionsIdTitle, Is.EqualTo("4819-5337-4080"));
-
-            /*var containerOptions = waiter.Until(SeleniumExtras.WaitHelpers
-                                                    .ExpectedConditions
-                                                    .ElementToBeClickable(By.Id("containerOptions")));
-            var SaveSearch = containerOptions.FindElement(By.ClassName("saveSearch"));
-            var titleList = SaveSearch.GetAttribute("aria-label");
-            Assert.That(titleList, Is.EqualTo("Save search"));
-            SaveSearch.Click();
-
-            okBtn = driver.FindElement(By.XPath(".//*[@id='buttonArea']/input[1]"));
-            okBtn.Click();*/
         }
-
     }
-
-
 }
  

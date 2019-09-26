@@ -14,19 +14,18 @@ namespace Sv_Selenium.Test
 {
     public class LoginPageTest : BaseTest
     {
-        private LoginPage objLoginPage;
-        private HomePage objHomePage;
+        private LoginPage LoginPage;
+        private HomePage HomePage;
 
         [Test]
         public void LoginAndChecksThatUserIsLoggedIn()
         {
-            objLoginPage = new LoginPage(driver);
-            objLoginPage.LoginToDucot(strUserName, strPassword);
+            LoginPage = new LoginPage(driver);
+            LoginPage.LoginToDucot(UserName, Password);
+            
             //checks that user is logged in (users’s name appears in Personal Menu)
-
-            objHomePage = new HomePage(driver, waiter);
-
-            string personalMenuName = objHomePage.GetPersonalMenuName();
+            HomePage = new HomePage(driver, waiter);
+            string personalMenuName = HomePage.GetPersonalMenuName();
 
             Assert.That(personalMenuName, Is.EqualTo("Svitlana"));
         }
