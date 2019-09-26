@@ -47,6 +47,7 @@
       <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -63,15 +64,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1Login_and_checks_that_user_is_logged_in.cs" />
+    <Compile Include="PageObjects\CreateSavedSearchPage.cs" />
+    <Compile Include="PageObjects\HomePage.cs" />
+    <Compile Include="PageObjects\LoginPage.cs" />
+    <Compile Include="PageObjects\SearchResultsPage.cs" />
+    <Compile Include="Test\LoginPageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Save_results_as_a_new_Saved_Search.cs" />
-    <Compile Include="Search_and_check_that_needed_document_appears_in_search_results.cs" />
+    <Compile Include="Test\BaseTest.cs" />
+    <Compile Include="Test\CreateSavedSearchPageTest.cs" />
+    <Compile Include="Test\SearchResultsPageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
